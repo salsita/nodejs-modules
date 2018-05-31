@@ -7,6 +7,7 @@ Shared modules used for node.js applications developed by Salsita.
 - [koa-error-middleware](./packages/koa-error-middleware)
 - [koa-force-ssl](./packages/koa-force-ssl)
 - [koa-joi-middleware](./packages/koa-joi-middleware)
+- [koa-jwt-auth](./packages/koa-jwt-auth)
 - [koa-server](./packages/koa-server)
 - [lock](./packages/lock)
 - [log](./packages/log)
