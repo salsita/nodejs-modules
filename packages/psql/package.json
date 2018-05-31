@@ -1,0 +1,14 @@
+{
+  "name": "@salsita/psql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Jan Dolezel <jando@salsitasoft.com>",
+  "license": "MIT",
+  "repository": "https://github.com/salsita/nodejs-modules/tree/master/packages/psql",
+  "dependencies": {
+    "@salsita/errors": "^1.0.0",
+    "@salsita/log": "^1.0.0",
+    "pg": "^7.4.3"
+  }
+}
