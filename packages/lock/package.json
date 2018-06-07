@@ -5,5 +5,8 @@
   "main": "index.js",
   "author": "Jan Dolezel <jando@salsitasoft.com>",
   "license": "MIT",
-  "repository": "https://github.com/salsita/nodejs-modules/tree/master/packages/lock"
+  "repository": "https://github.com/salsita/nodejs-modules/tree/master/packages/lock",
+  "publishConfig": {
+    "access": "public"
+  }
 }

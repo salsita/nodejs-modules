@@ -6,6 +6,9 @@
   "author": "Jan Dolezel <jando@salsitasoft.com>",
   "license": "MIT",
   "repository": "https://github.com/salsita/nodejs-modules/tree/master/packages/koa-server",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@salsita/get-error": "^1.0.0",
     "@salsita/koa-force-ssl": "^1.0.0",
