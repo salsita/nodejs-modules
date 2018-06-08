@@ -78,6 +78,15 @@ module.exports = async ({ log = defaultLog, ssl, allowUnsecure = !ssl } = {}) =>
       if (ssl && port == 443) {
         createRedirectServer().listen(80);
       }
+    },
+    shutdown: () => {
+      server.close(err => {
+        if (err) {
+          log("error", "Error when shutting down server", getError(err));
+          process.exitCode = 1;
+        }
+        process.exit();
+      });
     }
   };
 };
