@@ -13,6 +13,6 @@
     "@salsita/errors": "^1.0.0",
     "@salsita/get-error": "^1.0.0",
     "@salsita/log": "^1.0.0",
-    "http-status": "^1.1.2"
+    "http-status": "^1.2.0"
   }
 }

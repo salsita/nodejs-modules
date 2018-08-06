@@ -11,6 +11,6 @@
   },
   "dependencies": {
     "@salsita/errors": "^1.0.0",
-    "joi": "^13.3.0"
+    "joi": "^13.5.2"
   }
 }
