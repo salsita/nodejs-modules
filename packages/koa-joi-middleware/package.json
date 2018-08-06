@@ -1,6 +1,6 @@
 {
   "name": "@salsita/koa-joi-middleware",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "author": "Jan Dolezel <jando@salsitasoft.com>",
@@ -10,7 +10,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@salsita/errors": "^1.0.0",
+    "@salsita/errors": "^1.0.1",
     "joi": "^13.5.2"
   }
 }
