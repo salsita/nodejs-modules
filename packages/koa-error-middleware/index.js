@@ -1,9 +1,8 @@
 const HTTPStatus = require("http-status");
 const { ClientError } = require("@salsita/errors");
-const { getError, getErrorForClient } = require("@salsita/get-error");
 const defaultLog = require("@salsita/log");
 
-module.exports = (log = defaultLog) => async (ctx, next) => {
+module.exports = (log = defaultLog, formatUserMessage = e => e) => async (ctx, next) => {
   try {
     await next();
   } catch (err) {
@@ -13,11 +12,11 @@ module.exports = (log = defaultLog) => async (ctx, next) => {
         error: err.message
       };
     } else {
-      log("error", "Error while handling Koa request", getError(err));
+      log("error", "Error while handling Koa request", err);
 
       ctx.status = HTTPStatus.INTERNAL_SERVER_ERROR;
       ctx.body = {
-        error: getErrorForClient(err)
+        error: String(formatUserMessage(err))
       };
     }
   }

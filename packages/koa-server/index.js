@@ -10,21 +10,41 @@ const bodyParser = require("koa-bodyparser");
 const serve = require("koa-static");
 const send = require("koa-send");
 
+const { createNamespace } = require("continuation-local-storage");
+const uuidv4 = require("uuid/v4");
+
 const {
   middleware: forceSSL,
   createServer: createRedirectServer
 } = require("@salsita/koa-force-ssl");
-const { getError } = require("@salsita/get-error");
 const defaultLog = require("@salsita/log");
 
-module.exports = async ({ log = defaultLog, ssl, allowUnsecure = !ssl } = {}) => {
-  const app = new Koa();
+const transactionId = "transactionId";
 
-  app.on("error", err => log("error", "Error in Koa framework", getError(err)));
+const transaction = createNamespace("koa transaction");
+const getTransactionId = () => `tid:${transaction.get(transactionId) || "not-in-request"}`;
+morgan.token(transactionId, getTransactionId);
+
+const app = new Koa();
+
+const createWeb = ({ log = defaultLog, ssl, allowUnsecure = !ssl } = {}) => {
+  app.on("error", err => log("error", "Error in Koa framework", err));
 
   // configure server - headers, logging, etc.
+  app.use(async (ctx, next) => {
+    const context = transaction.createContext();
+    transaction.enter(context);
+    try {
+      transaction.set(transactionId, uuidv4());
+      return await next();
+    } finally {
+      transaction.exit(context);
+    }
+  });
   app.use(
-    morgan(":date[iso] - web: :method :url :status :res[content-length] - :response-time ms")
+    morgan(
+      `:date[iso] - web (tid::${transactionId}): :method :url :status :res[content-length] - :response-time ms`
+    )
   );
   app.use(forceSSL({ allowUnsecure }));
   app.use(cors());
@@ -41,13 +61,11 @@ module.exports = async ({ log = defaultLog, ssl, allowUnsecure = !ssl } = {}) =>
     );
   }
 
-  const server = ssl
-    ? https.createServer(await ssl, app.callback())
-    : http.createServer(app.callback());
+  const createServer = async () =>
+    ssl ? https.createServer(await ssl, app.callback()) : http.createServer(app.callback());
 
   return {
-    app,
-    server,
+    createServer,
     addRoutes: (actions, distDir) => {
       // api routes
       app.use(actions.routes(), actions.allowedMethods());
@@ -59,13 +77,13 @@ module.exports = async ({ log = defaultLog, ssl, allowUnsecure = !ssl } = {}) =>
         app.use(ctx => send(ctx, `${distDir}/index.html`));
       }
     },
-    start: port => {
+    start: (server, port) => {
       if (!port) {
         throw new Error("No port specified");
       }
       server.listen(port, err => {
         if (err) {
-          log("error", err);
+          log("error", "Error when starting server", err);
           process.exit(1);
         } else {
           const protocol = `http${allowUnsecure ? "" : "s"}`;
@@ -79,14 +97,20 @@ module.exports = async ({ log = defaultLog, ssl, allowUnsecure = !ssl } = {}) =>
         createRedirectServer().listen(80);
       }
     },
-    shutdown: () => {
+    shutdown: server => {
       server.close(err => {
         if (err) {
-          log("error", "Error when shutting down server", getError(err));
+          log("error", "Error when shutting down server", err);
           process.exitCode = 1;
         }
         process.exit();
       });
     }
   };
+};
+
+module.exports = {
+  app,
+  createWeb,
+  getTransactionId
 };
