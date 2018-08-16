@@ -1,5 +1,7 @@
 # nodejs-modules
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/salsita/nodejs-modules.svg)](https://greenkeeper.io/)
+
 Shared modules used for node.js applications developed by Salsita.
 
 - **[errors](./packages/errors)** - Commonly used error classes

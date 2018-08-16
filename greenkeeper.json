@@ -1,0 +1,19 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "package.json",
+        "packages/errors/package.json",
+        "packages/koa-error-middleware/package.json",
+        "packages/koa-force-ssl/package.json",
+        "packages/koa-joi-middleware/package.json",
+        "packages/koa-jwt-auth/package.json",
+        "packages/koa-server/package.json",
+        "packages/lock/package.json",
+        "packages/log/package.json",
+        "packages/prune-values/package.json",
+        "packages/psql/package.json"
+      ]
+    }
+  }
+}
