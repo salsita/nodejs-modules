@@ -40,7 +40,7 @@ jobs:
             npm install -g greenkeeper-lockfile
             greenkeeper-lockfile-update
             greenkeeper-lockfile-upload
-      - run: npm i
+      - run: npm i && cd packages && for i in *; do cd $i && npm i && cd ..; done
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
