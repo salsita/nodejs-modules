@@ -7,20 +7,21 @@
     "lint": "eslint -c eslintrc.js .",
     "lintfix": "npm run lint -- --fix",
     "test": "cross-env NODE_ENV=test mocha --opts ./mocha.opts \"./packages/*/{,!(node_modules)/**/}*.spec.js\"",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "lerna": "lerna"
   },
   "devDependencies": {
     "chai": "4.1.2",
     "cross-env": "5.2.0",
     "eslint": "5.3.0",
-    "eslint-config-airbnb-base": "13.0.0",
-    "eslint-config-prettier": "2.9.0",
-    "eslint-plugin-import": "2.13.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-config-prettier": "3.0.1",
+    "eslint-plugin-import": "2.14.0",
     "eslint-plugin-prettier": "2.6.2",
     "eslint-plugin-security": "1.4.0",
     "husky": "0.14.3",
-    "lerna": "3.0.1",
-    "lint-staged": "7.2.0",
+    "lerna": "3.0.6",
+    "lint-staged": "7.2.2",
     "mocha": "5.2.0",
     "prettier": "1.14.2",
     "sinon": "6.1.5",
@@ -29,5 +30,6 @@
   "lint-staged": {
     "*.js": ["npm run lintfix", "git add"],
     "*.{json,md}": ["prettier --write", "git add"]
-  }
+  },
+  "name": "nodejs-modules"
 }

@@ -40,7 +40,9 @@ jobs:
             npm install -g greenkeeper-lockfile
             greenkeeper-lockfile-update
             greenkeeper-lockfile-upload
-      - run: npm i && cd packages && for i in *; do cd $i && npm i && cd ..; done
+      - run:
+          name: npm install
+          command: npm i && npm run lerna bootstrap -- --no-ci
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
