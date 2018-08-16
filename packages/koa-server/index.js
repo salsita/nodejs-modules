@@ -36,7 +36,7 @@ const createWeb = ({ log = defaultLog, ssl, allowUnsecure = !ssl } = {}) => {
     const context = transaction.createContext();
     transaction.enter(context);
     try {
-      transaction.set(transactionId, uuidv4());
+      transaction.set(transactionId, ctx.request.headers["x-request-id"] || uuidv4());
       return await next();
     } finally {
       transaction.exit(context);
