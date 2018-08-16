@@ -20,11 +20,12 @@ const {
 } = require("@salsita/koa-force-ssl");
 const defaultLog = require("@salsita/log");
 
-const transactionId = "transactionId";
+const requestNSName = "koa request";
+const requestId = "requestId";
 
-const transaction = createNamespace("koa transaction");
-const getTransactionId = () => `tid:${transaction.get(transactionId) || "not-in-request"}`;
-morgan.token(transactionId, getTransactionId);
+const request = createNamespace(requestNSName);
+const getRequestId = () => request.get(requestId);
+morgan.token(requestId, getRequestId);
 
 const app = new Koa();
 
@@ -33,18 +34,18 @@ const createWeb = ({ log = defaultLog, ssl, allowUnsecure = !ssl } = {}) => {
 
   // configure server - headers, logging, etc.
   app.use(async (ctx, next) => {
-    const context = transaction.createContext();
-    transaction.enter(context);
+    const context = request.createContext();
+    request.enter(context);
     try {
-      transaction.set(transactionId, ctx.request.headers["x-request-id"] || uuidv4());
+      request.set(requestId, ctx.request.headers["x-request-id"] || uuidv4());
       return await next();
     } finally {
-      transaction.exit(context);
+      request.exit(context);
     }
   });
   app.use(
     morgan(
-      `:date[iso] - web (${transactionId}): :method :url :status :res[content-length] - :response-time ms`
+      `:date[iso] - web (rid:${requestId}): :method :url :status :res[content-length] - :response-time ms`
     )
   );
   app.use(forceSSL({ allowUnsecure }));
@@ -113,5 +114,6 @@ const createWeb = ({ log = defaultLog, ssl, allowUnsecure = !ssl } = {}) => {
 module.exports = {
   app,
   createWeb,
-  getTransactionId
+  requestNSName,
+  getRequestId
 };
