@@ -1,5 +1,11 @@
 # @salsita/psql
 
+[![NPM version](https://img.shields.io/npm/v/@salsita/psql.svg)](https://www.npmjs.com/package/@salsita/psql)
+![Downloads](https://img.shields.io/npm/dm/@salsita/psql.svg?style=flat)
+![Licence](https://img.shields.io/npm/l/@salsita/psql.svg?style=flat)
+[![Dependency Status](https://img.shields.io/david/salsita/nodejs-modules.svg?path=packages/psql)](https://david-dm.org/salsita/nodejs-modules?path=packages/psql)
+[![devDependency Status](https://img.shields.io/david/dev/salsita/nodejs-modules.svg?path=packages/psql)](https://david-dm.org/salsita/nodejs-modules?type=dev&path=packages/psql)
+
 Functions and utilities for wrapping postgres DB connection.
 
 - `connect` - accepts function and executes it passing DB connection as parameter.
@@ -23,28 +29,31 @@ const connect = psql.connect({ options: { connectionString: process.env.DATABASE
 const withDb = psql.withDb(connect);
 const { transaction } = psql;
 
-const usersModel = _.mapValues({
-  findById: onlyFirstRow((dbClient, id) =>
-    dbClient.query(
-      squel
-        .select()
-        .from('"Users"')
-        .where('"userId" = ?', id)
-        .toParam()
+const usersModel = _.mapValues(
+  {
+    findById: onlyFirstRow((dbClient, id) =>
+      dbClient.query(
+        squel
+          .select()
+          .from('"Users"')
+          .where('"userId" = ?', id)
+          .toParam()
+      )
+    ),
+    updateById: onlyFirstRow((dbClient, id, data) =>
+      dbClient.query(
+        squel
+          .update()
+          .table('"Users"')
+          .setFields(quote(data))
+          .where('"userId" = ?', id)
+          .returning("*")
+          .toParam()
+      )
     )
-  ),
-  updateById: onlyFirstRow((dbClient, id, data) =>
-    dbClient.query(
-      squel
-        .update()
-        .table('"Users"')
-        .setFields(quote(data))
-        .where('"userId" = ?', id)
-        .returning("*")
-        .toParam()
-    )
-  )
-}, withDb);
+  },
+  withDb
+);
 
 //
 // USAGE
@@ -54,8 +63,10 @@ const usersModel = _.mapValues({
 const user = await usersModel.findById(1);
 
 // using one connection for all queries in transaction
-const user = await connect(transaction(async dbClient => {
-  const oldUser = await usersModel.findById(dbClient, 1);
-  const newUser = await usersModel.updateById(dbClient, 1, { name: `${oldUser.name}son` });
-}));
+const user = await connect(
+  transaction(async dbClient => {
+    const oldUser = await usersModel.findById(dbClient, 1);
+    const newUser = await usersModel.updateById(dbClient, 1, { name: `${oldUser.name}son` });
+  })
+);
 ```
