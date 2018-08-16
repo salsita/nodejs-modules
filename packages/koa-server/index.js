@@ -44,7 +44,7 @@ const createWeb = ({ log = defaultLog, ssl, allowUnsecure = !ssl } = {}) => {
   });
   app.use(
     morgan(
-      `:date[iso] - web (tid::${transactionId}): :method :url :status :res[content-length] - :response-time ms`
+      `:date[iso] - web (${transactionId}): :method :url :status :res[content-length] - :response-time ms`
     )
   );
   app.use(forceSSL({ allowUnsecure }));
