@@ -6,7 +6,7 @@
     "precommit": "lint-staged",
     "lint": "eslint -c eslintrc.js .",
     "lintfix": "npm run lint -- --fix",
-    "test": "cross-env NODE_ENV=test mocha --opts ./mocha.opts \"./{,!(node_modules)/**/}*.spec.js\"",
+    "test": "cross-env NODE_ENV=test mocha --opts ./mocha.opts \"./packages/*/{,!(node_modules)/**/}*.spec.js\"",
     "test:watch": "npm test -- --watch"
   },
   "devDependencies": {
