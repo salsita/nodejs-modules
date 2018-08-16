@@ -86,4 +86,4 @@ Shared modules used for node.js applications developed by Salsita.
   [![Dependency Status](https://img.shields.io/david/salsita/nodejs-modules.svg?path=packages/psql)](https://david-dm.org/salsita/nodejs-modules?path=packages/psql)
   [![devDependency Status](https://img.shields.io/david/dev/salsita/nodejs-modules.svg?path=packages/psql)](https://david-dm.org/salsita/nodejs-modules?type=dev&path=packages/psql)
 
-See [https://github.com/salsita/nodejs-training](nodejs-training) repo for usage.
+See [nodejs-training](https://github.com/salsita/nodejs-training) repo for usage.
