@@ -12,7 +12,7 @@
   "dependencies": {
     "@salsita/koa-force-ssl": "^1.0.1",
     "@salsita/log": "^1.0.0",
-    "continuation-local-storage": "3.2.1",
+    "cls-hooked": "4.2.2",
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.1",
     "koa-compress": "^3.0.0",
