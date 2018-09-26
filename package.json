@@ -3,12 +3,16 @@
   "license": "MIT",
   "repository": "https://github.com/salsita/nodejs-modules",
   "scripts": {
-    "precommit": "lint-staged",
     "lint": "eslint -c eslintrc.js .",
     "lintfix": "npm run lint -- --fix",
     "test": "cross-env NODE_ENV=test mocha --opts ./mocha.opts \"./packages/*/{,!(node_modules)/**/}*.spec.js\"",
     "test:watch": "npm test -- --watch",
     "lerna": "lerna"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "devDependencies": {
     "chai": "4.1.2",
@@ -19,7 +23,7 @@
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-prettier": "2.6.2",
     "eslint-plugin-security": "1.4.0",
-    "husky": "0.14.3",
+    "husky": "1.0.0",
     "lerna": "3.4.0",
     "lint-staged": "7.3.0",
     "mocha": "5.2.0",
