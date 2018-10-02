@@ -1,6 +1,5 @@
 # nodejs-modules
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/salsita/nodejs-modules.svg)](https://greenkeeper.io/)
 [![Dependency Status](https://img.shields.io/david/salsita/nodejs-modules.svg)](https://david-dm.org/salsita/nodejs-modules)
 [![devDependency Status](https://img.shields.io/david/dev/salsita/nodejs-modules.svg)](https://david-dm.org/salsita/nodejs-modules?type=dev)
 [![CircleCI](https://img.shields.io/circleci/project/github/salsita/nodejs-modules.svg)](https://circleci.com/gh/salsita/workflows/nodejs-modules)

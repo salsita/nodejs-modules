@@ -35,12 +35,6 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: greenkeeper
-          command: |
-            npm install -g greenkeeper-lockfile
-            greenkeeper-lockfile-update
-            greenkeeper-lockfile-upload
-      - run:
           name: npm install
           command: npm i && npm run lerna bootstrap -- --no-ci
       - save_cache:
