@@ -27,7 +27,7 @@
     "lerna": "3.5.1",
     "lint-staged": "8.1.0",
     "mocha": "5.2.0",
-    "prettier": "1.15.2",
+    "prettier": "1.15.3",
     "sinon": "7.1.1",
     "sinon-chai": "3.3.0"
   },
