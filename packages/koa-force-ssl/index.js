@@ -6,7 +6,8 @@ module.exports = {
     if (
       allowUnsecure ||
       process.env.NODE_ENV !== "production" ||
-      (ctx.secure || ctx.header["x-forwarded-proto"] === "https")
+      ctx.secure ||
+      ctx.header["x-forwarded-proto"] === "https"
     ) {
       await next();
     } else {
