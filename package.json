@@ -32,8 +32,8 @@
     "sinon-chai": "3.4.0"
   },
   "lint-staged": {
-    "*.js": ["npm run lintfix", "git add"],
-    "*.{json,md}": ["prettier --write", "git add"]
+    "*.js": ["npm run lintfix"],
+    "*.{json,md}": ["prettier --write"]
   },
   "name": "nodejs-modules"
 }
