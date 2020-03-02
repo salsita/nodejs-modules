@@ -12,7 +12,7 @@ const send = require("koa-send");
 
 // const { createNamespace } = require("continuation-local-storage");
 const { createNamespace } = require("cls-hooked"); // experimental but works with async/await
-const uuidv4 = require("uuid/v4");
+const { v4: uuidv4 } = require("uuid");
 
 const {
   middleware: forceSSL,
