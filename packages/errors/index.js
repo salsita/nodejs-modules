@@ -8,5 +8,5 @@ module.exports = {
   JoiError: require("./JoiError"),
   NotFoundError: require("./NotFoundError"),
   UnauthorizedError: require("./UnauthorizedError"),
-  ValidationError: require("./ValidationError")
+  ValidationError: require("./ValidationError"),
 };

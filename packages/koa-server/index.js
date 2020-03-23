@@ -16,7 +16,7 @@ const { v4: uuidv4 } = require("uuid");
 
 const {
   middleware: forceSSL,
-  createServer: createRedirectServer
+  createServer: createRedirectServer,
 } = require("@salsita/koa-force-ssl");
 const defaultLog = require("@salsita/log");
 
@@ -30,7 +30,7 @@ morgan.token(requestId, getRequestId);
 const app = new Koa();
 
 const createWeb = ({ log = defaultLog, ssl, allowUnsecure = !ssl } = {}) => {
-  app.on("error", err => log("error", "Error in Koa framework", err));
+  app.on("error", (err) => log("error", "Error in Koa framework", err));
 
   // configure server - headers, logging, etc.
   app.use(async (ctx, next) => {
@@ -76,14 +76,14 @@ const createWeb = ({ log = defaultLog, ssl, allowUnsecure = !ssl } = {}) => {
         // static assets
         app.use(serve(distDir));
         // otherwise send index
-        app.use(ctx => send(ctx, `${distDir}/index.html`));
+        app.use((ctx) => send(ctx, `${distDir}/index.html`));
       }
     },
     start: (server, port) => {
       if (!port) {
         throw new Error("No port specified");
       }
-      server.listen(port, err => {
+      server.listen(port, (err) => {
         if (err) {
           log("error", "Error when starting server", err);
           process.exit(1);
@@ -99,15 +99,15 @@ const createWeb = ({ log = defaultLog, ssl, allowUnsecure = !ssl } = {}) => {
         createRedirectServer().listen(80);
       }
     },
-    shutdown: server => {
-      server.close(err => {
+    shutdown: (server) => {
+      server.close((err) => {
         if (err) {
           log("error", "Error when shutting down server", err);
           process.exitCode = 1;
         }
         process.exit();
       });
-    }
+    },
   };
 };
 
@@ -115,5 +115,5 @@ module.exports = {
   app,
   createWeb,
   requestNSName,
-  getRequestId
+  getRequestId,
 };

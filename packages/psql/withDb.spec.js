@@ -24,7 +24,7 @@ describe("wrap", () => {
   });
 
   it("should call fn with created dbClient when dbClient is not first argument", async () => {
-    const connectDB = sinon.spy(fn => fn(new pg.Client()));
+    const connectDB = sinon.spy((fn) => fn(new pg.Client()));
     const fn = sinon.spy();
     const args = [1, 2, 3];
     await withDb(connectDB)(fn)(...args);

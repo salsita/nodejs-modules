@@ -12,7 +12,7 @@ async function transaction(dbClient, fn) {
   }
 }
 
-module.exports = fn => async dbClient => {
+module.exports = (fn) => async (dbClient) => {
   if (dbClient[tidx]) {
     try {
       await dbClient[tidx];

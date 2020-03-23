@@ -7,7 +7,9 @@
     "lintfix": "npm run lint -- --fix",
     "test": "cross-env NODE_ENV=test mocha --opts ./mocha.opts \"./packages/*/{,!(node_modules)/**/}*.spec.js\"",
     "test:watch": "npm test -- --watch",
-    "lerna": "lerna"
+    "lerna": "lerna",
+    "postinstall": "for package in packages/*; do npm install --prefix $package; done",
+    "postoutdated": "for package in packages/*; do npm outdated --prefix $package; done"
   },
   "husky": {
     "hooks": {
@@ -27,7 +29,7 @@
     "lerna": "3.20.2",
     "lint-staged": "10.0.8",
     "mocha": "7.1.1",
-    "prettier": "1.19.1",
+    "prettier": "2.0.1",
     "sinon": "9.0.1",
     "sinon-chai": "3.5.0"
   },
