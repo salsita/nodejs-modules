@@ -6,7 +6,7 @@ const defaultLog = require("@salsita/log");
 const isMyQuery = Symbol("isMyQuery");
 
 module.exports = ({ log = defaultLog, options } = {}) => {
-  const adjust = dbClient => {
+  const adjust = (dbClient) => {
     if (!dbClient[isMyQuery]) {
       dbClient[isMyQuery] = true; // eslint-disable-line no-param-reassign
       const originalQuery = dbClient.query.bind(dbClient);
@@ -20,7 +20,7 @@ module.exports = ({ log = defaultLog, options } = {}) => {
           const time = (end[0] * 1e9 + end[1]) / 1e6;
           const argsFormatted = util.inspect(args);
           log("debug", `${time.toFixed(3)}`, argsFormatted, {
-            rowCount: result.rowCount
+            rowCount: result.rowCount,
           });
           return result;
         } catch (err) {
@@ -34,7 +34,7 @@ module.exports = ({ log = defaultLog, options } = {}) => {
 
   const pool = new pg.Pool(options);
 
-  const connect = async fn => {
+  const connect = async (fn) => {
     const dbClient = await pool.connect();
     try {
       adjust(dbClient);

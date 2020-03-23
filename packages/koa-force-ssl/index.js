@@ -2,7 +2,7 @@ const http = require("http");
 const HTTPStatus = require("http-status");
 
 module.exports = {
-  middleware: allowUnsecure => async (ctx, next) => {
+  middleware: (allowUnsecure) => async (ctx, next) => {
     if (
       allowUnsecure ||
       process.env.NODE_ENV !== "production" ||
@@ -18,8 +18,8 @@ module.exports = {
   createServer: () =>
     http.createServer((req, res) => {
       res.writeHead(HTTPStatus.MOVED_PERMANENTLY, {
-        Location: `https://${req.headers.host}${req.url}`
+        Location: `https://${req.headers.host}${req.url}`,
       });
       res.end();
-    })
+    }),
 };

@@ -4,7 +4,7 @@ const { JoiError } = require("@salsita/errors");
 module.exports = (schemas, options = {}) => {
   const extOptions = {
     ...options,
-    abortEarly: options.abortEarly === undefined ? false : options.abortEarly
+    abortEarly: options.abortEarly === undefined ? false : options.abortEarly,
   };
   return async (ctx, next) => {
     try {

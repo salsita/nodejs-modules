@@ -3,5 +3,5 @@
 module.exports = {
   connect: require("./connect"),
   transaction: require("./transaction"),
-  withDb: require("./withDb")
+  withDb: require("./withDb"),
 };

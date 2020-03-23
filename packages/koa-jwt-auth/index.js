@@ -14,9 +14,9 @@ module.exports = ({
   expiresIn = defaultExpiresIn,
   version = defaultVersion,
   createSession,
-  getUserForSession
+  getUserForSession,
 }) => {
-  const resignPayload = payload => {
+  const resignPayload = (payload) => {
     delete payload.exp; // eslint-disable-line no-param-reassign
     return jwt.sign(payload, key, { algorithm, expiresIn });
   };
@@ -26,14 +26,14 @@ module.exports = ({
     return resignPayload({ payload, version });
   };
 
-  const isSessionValid = session => session && session.version === version;
+  const isSessionValid = (session) => session && session.version === version;
 
   passport.use(
     new Strategy(
       {
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
         secretOrKey: key,
-        algorithms: [algorithm]
+        algorithms: [algorithm],
       },
       async (jwtPayload, done) => {
         if (!isSessionValid(jwtPayload)) {
@@ -64,6 +64,6 @@ module.exports = ({
         return ctx.logIn(user, { session: false });
       })(ctx);
       return next();
-    }
+    },
   };
 };
