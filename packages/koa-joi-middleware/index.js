@@ -1,4 +1,3 @@
-const joi = require("@hapi/joi");
 const { JoiError } = require("@salsita/errors");
 
 module.exports = (schemas, options = {}) => {
@@ -8,9 +7,7 @@ module.exports = (schemas, options = {}) => {
   };
   return async (ctx, next) => {
     try {
-      await Promise.all(
-        schemas.map(({ get, schema }) => joi.validate(get(ctx), schema, extOptions))
-      );
+      await Promise.all(schemas.map(({ get, schema }) => schema.validate(get(ctx), extOptions)));
     } catch (err) {
       throw new JoiError(err);
     }
