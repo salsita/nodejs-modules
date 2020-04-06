@@ -1,6 +1,6 @@
 {
   "name": "@salsita/psql",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "author": "Jan Dolezel <jando@salsitasoft.com>",
@@ -10,8 +10,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@salsita/errors": "^1.0.1",
-    "@salsita/log": "^1.0.0",
+    "@salsita/errors": "^1.0.2",
+    "@salsita/log": "^1.0.1",
     "pg": "^8.0.0"
   }
 }

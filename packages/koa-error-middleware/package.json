@@ -1,6 +1,6 @@
 {
   "name": "@salsita/koa-error-middleware",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "main": "index.js",
   "author": "Jan Dolezel <jando@salsitasoft.com>",
@@ -10,8 +10,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@salsita/errors": "^1.0.1",
-    "@salsita/log": "^1.0.0",
+    "@salsita/errors": "^1.0.2",
+    "@salsita/log": "^1.0.1",
     "http-status": "^1.2.0"
   }
 }

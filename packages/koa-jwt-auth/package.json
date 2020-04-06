@@ -1,6 +1,6 @@
 {
   "name": "@salsita/koa-jwt-auth",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "author": "Jan Dolezel <jando@salsitasoft.com>",
@@ -10,7 +10,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@salsita/errors": "^1.0.1",
+    "@salsita/errors": "^1.0.2",
     "jsonwebtoken": "^8.3.0",
     "koa-passport": "^4.1.0",
     "passport-jwt": "^4.0.0"
