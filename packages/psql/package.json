@@ -12,6 +12,6 @@
   "dependencies": {
     "@salsita/errors": "^1.0.1",
     "@salsita/log": "^1.0.0",
-    "pg": "^7.4.3"
+    "pg": "^8.0.0"
   }
 }

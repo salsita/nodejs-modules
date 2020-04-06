@@ -59,5 +59,3 @@ typings/
 
 # IDE files
 .idea
-
-packages/*/package-lock.json
