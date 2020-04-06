@@ -11,7 +11,7 @@ Middleware used on routes to validate input.
 Example:
 
 ```js
-const joi = require("joi");
+const joi = require("@hapi/joi");
 const Router = require("koa-router");
 const joiMiddleware = require("@salsita/koa-joi-middleware");
 
