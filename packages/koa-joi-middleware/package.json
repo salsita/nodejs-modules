@@ -1,6 +1,6 @@
 {
   "name": "@salsita/koa-joi-middleware",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "author": "Jan Dolezel <jando@salsitasoft.com>",
