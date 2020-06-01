@@ -31,11 +31,11 @@ jobs:
     steps:
       - checkout
       - <<: *set-npm-global
-      - run: npm install -g npm@6.3.0
+      - run: npm install -g npm@$(jq -r '.engines.npm' package.json)
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: npm install
+          name: npm ci
           command: npm i && npm run lerna bootstrap -- --no-ci
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
