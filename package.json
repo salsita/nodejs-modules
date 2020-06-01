@@ -37,5 +37,8 @@
     "*.js": ["npm run lintfix"],
     "*.{json,md}": ["prettier --write"]
   },
-  "name": "nodejs-modules"
+  "name": "nodejs-modules",
+  "engines": {
+    "npm": "6.14.5"
+  }
 }
