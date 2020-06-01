@@ -35,7 +35,7 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: npm install
+          name: npm ci
           command: npm i && npm run lerna bootstrap -- --no-ci
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
