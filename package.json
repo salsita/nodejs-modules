@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "eslint -c eslintrc.js .",
     "lintfix": "npm run lint -- --fix",
-    "test": "cross-env NODE_ENV=test mocha --opts ./mocha.opts \"./packages/*/{,!(node_modules)/**/}*.spec.js\"",
+    "test": "cross-env NODE_ENV=test mocha --recursive --require ./mocha.bootstrap.js \"./packages/*/{,!(node_modules)/**/}*.spec.js\"",
     "test:watch": "npm test -- --watch",
     "lerna": "lerna",
     "postinstall": "for package in packages/*; do npm install --prefix $package; done",
