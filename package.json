@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "eslint -c eslintrc.js .",
     "lintfix": "npm run lint -- --fix",
-    "test": "cross-env NODE_ENV=test mocha --opts ./mocha.opts \"./packages/*/{,!(node_modules)/**/}*.spec.js\"",
+    "test": "cross-env NODE_ENV=test mocha --recursive --require ./mocha.bootstrap.js \"./packages/*/{,!(node_modules)/**/}*.spec.js\"",
     "test:watch": "npm test -- --watch",
     "lerna": "lerna",
     "postinstall": "for package in packages/*; do npm install --prefix $package; done",
@@ -28,7 +28,7 @@
     "husky": "4.2.5",
     "lerna": "3.22.1",
     "lint-staged": "10.2.10",
-    "mocha": "7.2.0",
+    "mocha": "8.0.1",
     "prettier": "2.0.5",
     "sinon": "9.0.2",
     "sinon-chai": "3.5.0"
