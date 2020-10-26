@@ -29,7 +29,8 @@ morgan.token(requestId, getRequestId);
 
 const app = new Koa();
 
-const createWeb = ({ log = defaultLog, ssl, allowUnsecure = !ssl } = {}) => {
+const createWeb = (options = {}) => {
+  const { log = defaultLog, ssl, allowUnsecure = !ssl } = options;
   app.on("error", (err) => log("error", "Error in Koa framework", err));
 
   // configure server - headers, logging, etc.
@@ -49,10 +50,10 @@ const createWeb = ({ log = defaultLog, ssl, allowUnsecure = !ssl } = {}) => {
     )
   );
   app.use(forceSSL({ allowUnsecure }));
-  app.use(cors());
-  app.use(helmet());
-  app.use(compress());
-  app.use(bodyParser());
+  app.use(cors(options.cors));
+  app.use(helmet(options.helmet));
+  app.use(compress(options.compress));
+  app.use(bodyParser(options.bodyParser));
 
   if (!ssl !== allowUnsecure) {
     log(
