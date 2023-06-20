@@ -12,7 +12,7 @@
   "dependencies": {
     "@salsita/errors": "^1.0.2",
     "jsonwebtoken": "^8.3.0",
-    "koa-passport": "^4.1.0",
+    "koa-passport": "^6.0.0",
     "passport-jwt": "^4.0.0"
   }
 }
